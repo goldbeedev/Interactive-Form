@@ -33,6 +33,8 @@ jobs.onchange = function() {
 //get the design option values into a variable
 var tShirts = document.getElementById("design");
 
+
+
 //get the color option values into a variable
 var ShirtColors = document.getElementById("color");
 
@@ -54,6 +56,8 @@ tShirts.onchange = function() {
 		ShirtColors[0].style.display = "none";
 		ShirtColors[1].style.display = "none";
 		ShirtColors[2].style.display = "none";
+	}
+
 	}
 }
 
