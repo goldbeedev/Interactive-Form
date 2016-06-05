@@ -5,7 +5,7 @@ var Email;
 
 //focus the first input field on pageload
 window.onload = function(){
-	var input = document.getElementById("name").focus();
+	var input = document.getElementById("name").focus()
 }
 //get the jobs option values into a variable
 var jobs = document.getElementById("title");
@@ -27,39 +27,43 @@ jobs.onchange = function() {
 	}
 }
 
-//T-shirt info - if the user selects "Theme- JS Puns" then the color menu should only display "Cornflower Blue [0]", "Dark Slate Grey [1]," and "Gold[2]"
-//T-shirt info - if the user selects "Theme - I <3 JS" then the color menu should only display "Tomato," "Steel Blue" and "Dim Grey"
 
 //get the design option values into a variable
 var tShirts = document.getElementById("design");
 
-
+console.log(tShirts);
 
 //get the color option values into a variable
 var ShirtColors = document.getElementById("color");
 
+//group the shirt types into arrays with corresponding color types.
+var Shirtdata = {
+	"jspuns":["Cornflower Blue (JS Puns shirt only):value1","Dark Slate Grey (JS Puns shirt only):value2","Gold (JS Puns shirt only):value3"],
+	"heartjs":["Tomato (I &#9829; JS shirt only):value4","Steel Blue (I &#9829; JS shirt only):value5","Dim Grey (I &#9829; JS shirt only):value6"]
+};
+
+//make the default shirt color selection please select a theme on pageload.
+window.onload = function() {
+	ShirtColors.innerHTML = "<option value='NoSelected'>Please Select a Theme</option>";
+}
+
+
+
 //function for the value of the design selection to change the corresponding color selector menu.
 tShirts.onchange = function() {
-	if (tShirts.value == "js puns") {
-		ShirtColors.selectedIndex = 0;
-		ShirtColors[3].style.display = "none";
-		ShirtColors[4].style.display = "none";
-		ShirtColors[5].style.display = "none";
-		ShirtColors[0].style.display = "initial";
-		ShirtColors[1].style.display = "initial";
-		ShirtColors[2].style.display = "initial";
-	} else if (tShirts.value == "heart js") {
-		ShirtColors.selectedIndex = 3;
-		ShirtColors[3].style.display = "initial";
-		ShirtColors[4].style.display = "initial";
-		ShirtColors[5].style.display = "initial";
-		ShirtColors[0].style.display = "none";
-		ShirtColors[1].style.display = "none";
-		ShirtColors[2].style.display = "none";
-	}
-
+	ShirtColors.innerHTML = "<option value='NoSelected'>Please Select a Theme</option>";
+	var selectedValue = tShirts.value.split(' ').join('');
+	if(!Shirtdata[selectedValue])
+		return;
+//loop through the data to create option values and display text.
+	for(var i = 0; i < Shirtdata[selectedValue].length; i++){
+		var option = document.createElement('option');
+	option.value = Shirtdata[selectedValue][i].split(':')[1];
+	option.innerHTML = Shirtdata[selectedValue][i].split(':')[0];
+	ShirtColors.appendChild(option);
 	}
 }
+
 
 
 

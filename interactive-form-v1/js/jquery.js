@@ -1,6 +1,9 @@
 
 
 $(document).ready(function() {
+	window.onload = function(){
+	var input = document.getElementById("name").focus()
+}
 	//append the total dollars display under activities and hide it until clicked
 	var $ActivityError = $('<div></div>');
 	var $TotalDollars = 0;
@@ -13,7 +16,7 @@ $(document).ready(function() {
 	console.log($("input[name='all']"));
 
 
-	function updateTotal() {
+	function updateTotal() { 
     
     var total = $(".activities input:checkbox:checked")
        
@@ -112,9 +115,9 @@ $("#credit-card").show();
 	});
 
 
-			//when the submit button is clicked validate the forms.
+//when the submit button is clicked validate the forms.
 	$('button').on("click", function(e) {
-		   //prevent default styles from being applied when the submit button is pressed, thank you @Thuy!
+//prevent default styles from being applied when the submit button is pressed, thank you @Thuy!
         e.preventDefault();
      	if ($('#name').val() === '') {
      	  $('#name').prev().css("color", "red");
@@ -125,7 +128,7 @@ $("#credit-card").show();
      	}
 
 
-     //if the credit card forms are empty change to red, if not stay black.
+//if the credit card forms are empty change to red, if not stay black.
      if ($('#cc-num').val() === '') {
      	 $('#cc-num').prev().css("color", "red");
 	
@@ -147,18 +150,17 @@ $("#credit-card").show();
 	 	$('#cvv').prev().css("color", "red");
 	 }
 
-	//When the submit button is clicked make sure the user has selected at least one activity
+//When the submit button is clicked make sure the user has selected at least one activity
 
      var checkedsubmit = $(".activities input:checked").length > 0;
       if (!checkedsubmit) {
-      	alert('Please select an activity');
       	($ActivityError).html('<div style="margin-top:-22px;color:red">please choose an activity</div>');
       	($ActivityError).show();
       } else {
       	($ActivityError).hide();
       }
 
-    //check that a valid email address is provided - StackOverflow
+//check that a valid email address is provided - StackOverflow
   function isEmail(email) {
   var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
   return regex.test(email);
@@ -170,7 +172,14 @@ $("#credit-card").show();
 			$("#mail").prev().html('<div style="color:black">Email:</div>');
 		}
 
-
+//check to see if the user selected a shirt, we do this by checking if the design option selected contains a value
+// if not add CSS to make the shirt info area red, otherwise keep it black.
+if ($('#design option:not([value])').is(':selected')) {
+	$('.shirt > legend').css("color", "red");
+} else {
+	$('.shirt > legend').css("color", "inherit");
+}
+ 
 
  });
 
@@ -180,15 +189,3 @@ $("#credit-card").show();
 
 
 
-
-//Make event handler so when submit button is pressed form validation takes place
-// $('button').on("click", function() {
-// 		if ($('#name').val() === '') {
-// 		$('#name').prev().css("color", "red")
-// 		}
-
-// });
-
-
-// else if $("input[name='express']").is(':checked') {
-// 				$("input[name='js-frameworks']").prop('disabled', true);
