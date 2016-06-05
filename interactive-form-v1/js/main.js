@@ -57,6 +57,11 @@ tShirts.onchange = function() {
 	}
 }
 
+var Payments = document.getElementById("payment");
 
+Payments.onchange = function() {
+	var SelectedPayment = Payments.options[Payments.selectedIndex].value;
+		if (SelectedPayment == "")
+}
 
 
