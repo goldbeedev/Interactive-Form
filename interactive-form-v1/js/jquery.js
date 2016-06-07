@@ -1,9 +1,7 @@
 
 
 $(document).ready(function() {
-	window.onload = function(){
-	var input = document.getElementById("name").focus()
-}
+
 	//append the total dollars display under activities and hide it until clicked
 	var $ActivityError = $('<div></div>');
 	var $TotalDollars = 0;
@@ -118,10 +116,11 @@ $("#credit-card").show();
 //when the submit button is clicked validate the forms.
 	$('button').on("click", function(e) {
 //prevent default styles from being applied when the submit button is pressed, thank you @Thuy!
-        e.preventDefault();
+        
      	if ($('#name').val() === '') {
      	  $('#name').prev().css("color", "red");
      	  $('#name').prev().html("Name: (please enter a name)");
+     	  e.preventDefault();
      	} else {
      		$('#name').prev().css("color", "black");
      	  $('#name').prev().html("Name:");
@@ -129,15 +128,18 @@ $("#credit-card").show();
 
 
 //if the credit card forms are empty change to red, if not stay black.
+//Use prevent default if the forms are empty to override the default styles and prevent the submit button from working
      if ($('#cc-num').val() === '') {
      	 $('#cc-num').prev().css("color", "red");
-	
+		e.preventDefault();
+
 	} else {
 		$('#cc-num').prev().css("color", "black");
 	}
 
 	if ($('#zip').val() === '') {
 		  $('#zip').prev().css("color", "red");
+		  e.preventDefault();
 
 	} else {
 		 $('#zip').prev().css("color", "black");
@@ -145,9 +147,10 @@ $("#credit-card").show();
 
 	if ($('#cvv').val() === '') {
 		  $('#cvv').prev().css("color", "red");
-		
+		e.preventDefault();
+
 	 } else {
-	 	$('#cvv').prev().css("color", "red");
+	 	$('#cvv').prev().css("color", "black");
 	 }
 
 //When the submit button is clicked make sure the user has selected at least one activity
@@ -156,6 +159,7 @@ $("#credit-card").show();
       if (!checkedsubmit) {
       	($ActivityError).html('<div style="margin-top:-22px;color:red">please choose an activity</div>');
       	($ActivityError).show();
+      	e.preventDefault();
       } else {
       	($ActivityError).hide();
       }
@@ -168,6 +172,7 @@ $("#credit-card").show();
 
 	if (!isEmail($("#mail").val())) {
 			$("#mail").prev().html('<div style="color:red">Email: (please provide a valid email address)</div>');
+			e.preventDefault();
 		} else {
 			$("#mail").prev().html('<div style="color:black">Email:</div>');
 		}
@@ -176,6 +181,7 @@ $("#credit-card").show();
 // if not add CSS to make the shirt info area red, otherwise keep it black.
 if ($('#design option:not([value])').is(':selected')) {
 	$('.shirt > legend').css("color", "red");
+	e.preventDefault();
 } else {
 	$('.shirt > legend').css("color", "inherit");
 }

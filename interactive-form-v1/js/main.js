@@ -4,20 +4,21 @@ var Name;
 var Email;
 
 //focus the first input field on pageload
-window.onload = function(){
+window.addEventListener('load', function() {
 	var input = document.getElementById("name").focus()
-}
+});
+	
+
 //get the jobs option values into a variable
 var jobs = document.getElementById("title");
 
 
-console.log(jobs);
-
+//ad a value to the textInput variable to prevent errors if the "other" value isn't selected first.
+textInput = document.createElement('div');
 
 //if the value of jobs changes to "other" append a text form
 jobs.onchange = function() {
 	if (jobs.value == "other") {
-		textInput = document.createElement('div');
 		textInput.setAttribute("id", "other-title")
 		textInput.innerHTML = '<input type = "text" value="Your Title" class="textfield"></input>';
 		fieldsetget = document.getElementsByTagName("fieldset")[0];
@@ -43,15 +44,15 @@ var Shirtdata = {
 };
 
 //make the default shirt color selection please select a theme on pageload.
-window.onload = function() {
+window.addEventListener('load', function() {
 	ShirtColors.innerHTML = "<option value='NoSelected'>Please Select a Theme</option>";
-}
+});
 
 
 
 //function for the value of the design selection to change the corresponding color selector menu.
 tShirts.onchange = function() {
-	ShirtColors.innerHTML = "<option value='NoSelected'>Please Select a Theme</option>";
+	ShirtColors.innerHTML = "<option value='NoSelected'>Please Select a Theme</option>"
 	var selectedValue = tShirts.value.split(' ').join('');
 	if(!Shirtdata[selectedValue])
 		return;
@@ -61,6 +62,7 @@ tShirts.onchange = function() {
 	option.value = Shirtdata[selectedValue][i].split(':')[1];
 	option.innerHTML = Shirtdata[selectedValue][i].split(':')[0];
 	ShirtColors.appendChild(option);
+	$("#color option[value='NoSelected']").remove();
 	}
 }
 
